@@ -1,0 +1,302 @@
+<html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Perla del Ulúa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Estilos Generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #fff5f7;
+            color: #333;
+        }
+
+        /* Barra de Menú */
+        nav {
+            background-color: #ff85a2;
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: inline-flex;
+        }
+
+        nav ul li {
+            position: relative;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            top: 100%;
+            left: 0;
+            border-radius: 5px;
+        }
+
+        .dropdown-content a {
+            color: #ff85a2;
+            padding: 12px 16px;
+            display: block;
+            text-align: left;
+            text-decoration: none;
+        }
+
+        nav ul li:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Portada con Logo */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(rgba(255, 133, 162, 0.2), rgba(255, 255, 255, 1));
+        }
+
+        .logo-escudo {
+            width: 180px; /* Tamaño del logo */
+            height: 180px;
+            border-radius: 50%; /* Esto hace que la imagen se vea circular */
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #d81b60;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #ff4081;
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        /* Formulario */
+        .container {
+            max-width: 500px;
+            margin: 0 auto 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #fce4ec;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #ff85a2;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #f06292;
+        }
+
+        .hidden { display: none; }
+        label { font-weight: bold; color: #d81b60; display: block; margin-top: 15px; }
+
+        /* Estilos sencillos para tus fotos sin alterar tu diseño */
+        .seccion-fotos-nueva {
+            max-width: 500px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .seccion-fotos-nueva img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        /* Estilos para los botones de contacto */
+        .boton-red-social {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 25px;
+            margin: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .color-wa { background-color: #25D366; }
+        .color-fb { background-color: #1877F2; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li>
+                <a href="#">Académico ▾</a>
+                <div class="dropdown-content">
+                    <a href="#">Carreras</a>
+                    <a href="#galeria">Galería</a>
+                </div>
+            </li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <img src="logo.jpeg" alt="Logo Instituto" class="logo-escudo">
+        <h1>Instituto Perla del Ulúa</h1>
+        <p>Progreso, Yoro</p>
+    </div>
+
+    <div class="container">
+        <div id="step1">
+            <h3 style="text-align:center; color:#ff85a2;">Bienvenido</h3>
+            <input type="text" id="nombre" placeholder="Ingresa tu nombre" required>
+            <input type="email" id="correo" placeholder="Correo electrónico" required>
+            <button onclick="mostrarCarreras()">Explorar Carreras</button>
+        </div>
+
+        <div id="step2" class="hidden">
+            <h3 id="bienvenida" style="text-align:center; color:#d81b60;"></h3>
+            
+            <label>¿Qué carrera desea ver?</label>
+            <select id="carrera" onchange="actualizarSecciones()">
+                <option value="">-- Seleccione --</option>
+                <option value="informatica">Informática</option>
+                <option value="salud">Salud</option>
+                <option value="finanzas">BTP en Finanzas</option>
+            </select>
+
+            <label>Jornada</label>
+            <select id="jornada" onchange="actualizarSecciones()">
+                <option value="matutina">Matutina</option>
+                <option value="vespertina">Vespertina</option>
+            </select>
+
+            <label>Grado</label>
+            <select id="grado">
+                <option value="11">Onceavo</option>
+                <option value="10">Décimo</option>
+                <option value="12">Doceavo</option>
+            </select>
+
+            <label>Sección</label>
+            <select id="seccion"></select>
+        </div>
+    </div>
+
+    <div id="galeria" class="seccion-fotos-nueva">
+        <h2 style="color: #d81b60; font-family: 'Georgia', serif; margin-bottom: 20px;">Galería</h2>
+        
+        <h3>Modulo 1</h3>
+        <img src="modulo1.jpeg" alt="Módulo 1">
+
+        <h3>Modulo 2</h3>
+        <img src="modulo2.jpeg" alt="Módulo 2">
+
+        <h3>Modulo 3</h3>
+        <img src="modulo3.jpeg" alt="Módulo 3">
+
+        <h3>Modulo 4</h3>
+        <img src="modulo4.jpeg" alt="Módulo 4">
+
+        <h3>Modulo 5</h3>
+        <img src="modulo5.jpeg" alt="Módulo 5">
+
+        <h2 style="color: #d81b60; font-family: 'Georgia', serif; margin-top: 40px; margin-bottom: 20px;">Fotos del Instituto</h2>
+        <img src="fotoinst1.jpeg" alt="Instituto 1">
+        <img src="fotoinst2.jpeg" alt="Instituto 2">
+    </div>
+
+    <div id="contacto" class="seccion-fotos-nueva">
+        <h2 style="color: #d81b60; font-family: 'Georgia', serif; margin-bottom: 20px;">Contacto</h2>
+        
+        <a href="https://wa.me/96752974" class="boton-red-social color-wa" target="_blank">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+
+        <a href="https://www.facebook.com" class="boton-red-social color-fb" target="_blank">
+            <i class="fab fa-facebook-f"></i> Facebook
+        </a>
+    </div>
+
+    <script>
+        function mostrarCarreras() {
+            const nombre = document.getElementById('nombre').value;
+            const correo = document.getElementById('correo').value;
+            if(nombre && correo) {
+                document.getElementById('step1').classList.add('hidden');
+                document.getElementById('step2').classList.remove('hidden');
+                document.getElementById('bienvenida').innerText = "Hola, " + nombre;
+                actualizarSecciones();
+            } else {
+                alert("Por favor completa los datos para continuar.");
+            }
+        }
+
+        function actualizarSecciones() {
+            const carrera = document.getElementById('carrera').value;
+            const jornada = document.getElementById('jornada').value;
+            const seccionSelect = document.getElementById('seccion');
+            
+            seccionSelect.innerHTML = "";
+
+            if (carrera === "informatica") {
+                if (jornada === "vespertina") {
+                    seccionSelect.options.add(new Option("Sección 1", "1"));
+                    seccionSelect.options.add(new Option("Sección 2", "2"));
+                } else {
+                    seccionSelect.options.add(new Option("Sección 2", "2-m"));
+                }
+            } else {
+                seccionSelect.options.add(new Option("Sección Única", "u"));
+            }
+        }
+    </script>
+</body>
+</html>

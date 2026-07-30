@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Perla del Ulúa</title>
+    <style>
+        /* Estilos Generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #e6153f;
+            color: #333;
+        }
+
+        /* Barra de Menú */
+        nav {
+            background-color: #ff85a2;
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: inline-flex;
+        }
+
+        nav ul li {
+            position: relative;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            top: 100%;
+            left: 0;
+            border-radius: 5px;
+        }
+
+        .dropdown-content a {
+            color: #f10940;
+            padding: 12px 16px;
+            display: block;
+            text-align: left;
+            text-decoration: none;
+        }
+
+        nav ul li:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Portada con Logo */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(rgba(255, 133, 162, 0.2), rgba(255, 255, 255, 1));
+        }
+
+        .logo-escudo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #7c0833;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #d11252;
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        /* Formularios y Tarjetas de Información */
+        .container {
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #fce4ec;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 0.95rem;
+        }
+
+        button {
+            background-color: #be183f;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #c2144e;
+        }
+
+        .hidden { display: none; }
+        
+        label { 
+            font-weight: bold; 
+            color: #d81b60; 
+            display: block; 
+            margin-top: 15px; 
+        }
+
+        .info-resultado {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff0f3;
+            border-left: 4px solid #b83762;
+            border-radius: 4px;
+        }
+
+        .info-resultado h4 {
+            margin: 0 0 10px 0;
+            color: #d81b60;
+        }
+
+        /* Diseño de Galerías Medianas */
+        .grid-galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .galeria-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid #fce4ec;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .galeria-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .galeria-caption {
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            color: #740909;
+            font-size: 0.9rem;
+        }
+
+        /* ==========================================================================
+           ANIMACIÓN INTERACTIVA 3D DE SASUKE BAILANDO
+           ========================================================================== */
+        .contenedor-sasuke-3d {
+            max-width: 320px;
+            height: 250px;
+            margin: 0 auto 25px auto;
+            background: linear-gradient(135deg, #2b2e4a, #e84545);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            perspective: 600px; /* Habilita el entorno 3D */
+            overflow: hidden;
+            border: 4px solid #b10e34;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Cartel de Bienvenida Flotante */
+        .cartel-bienvenida {
+            background-color: #fff;
+            color: #dd0756;
+            padding: 8px 16px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 20px;
+            border: 2px solid #ca1640;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+            z-index: 10;
+            animation: flotarCartel 2s ease-in-out infinite alternate;
+        }
+
+        /* Cuerpo del Personaje en 3D */
+        .sasuke-cuerpo {
+            width: 70px;
+            height: 110px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: sasukeBailando 1.2s ease-in-out infinite alternate;
+        }
+
+        /* Ropa / Capa de Sasuke */
+        .sasuke-capa {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #1c1d24; /* Color azul oscuro/negro de su ropa */
+            border-radius: 10px 10px 0 0;
+            border-bottom: 12px solid #53354a; /* Detalle de la cintura */
+        }
+
+        /* Rostro y Cabello Extruido */
+        .sasuke-cabeza {
+            position: absolute;
+            top: -45px;
+            left: 10px;
+            width: 50px;
+            height: 45px;
+            background-color: #ffdbac; /* Tono de piel */
+            border-radius: 50%;
+        }
+
+        /* Ojo Rinnegan / Sharingan Destello */
+        .sasuke-cabeza::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 10px;
+            width: 8px;
+            height: 8px;
+            background-color: #c91325; /* Destello Rojo */
+            border-radius: 50%;
+            box-shadow: 0 0 8px #44080e, 22px 0 0 #845ec2; /* Rinnegan Morado Izquierdo */
+        }
+
+        /* Pelo en puntas característico */
+        .sasuke-pelo {
+            position: absolute;
+            top: -55px;
+            left: 2px;
+            width: 66px;
+            height: 50px;
+            background-color: #0f1123;
+            clip-path: polygon(20% 100%, 0% 60%, 15% 40%, 35% 10%, 55% 25%, 75% 5%, 90% 35%, 100% 70%, 80% 100%);
+        }
+
+        /* Componentes de las Piernas de Baile */
+        .sasuke-piernas {
+            position: absolute;
+            bottom: -25px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .pierna {
+            width: 14px;
+            height: 30px;
+            background-color: #ffffff;
+            border-bottom: 8px solid #1c1d24;
+            border-radius: 0 0 4px 4px;
+            animation: moverPiernas 0.6s linear infinite alternate;
+        }
+
+        .pierna.der {
+            animation-delay: 0.3s;
+        }
+
+        /* Keyframes de las animaciones coreográficas */
+        @keyframes flotarCartel {
+            0% { transform: translateY(0) rotate(-2deg); }
+            100% { transform: translateY(-6px) rotate(2deg); }
+        }
+
+        @keyframes sasukeBailando {
+            0% { transform: rotateY(-20deg) rotateX(10deg) translateY(0) skewX(-5deg); }
+            100% { transform: rotateY(20deg) rotateX(-5deg) translateY(-8px) skewX(5deg); }
+        }
+
+        @keyframes moverPiernas {
+            0% { height: 25px; transform: rotate(-5deg); }
+            100% { height: 35px; transform: rotate(10deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="#" onclick="irAInicio()">Inicio</a></li>
+            <li>
+                <a href="#">Académico ▾</a>
+                <div class="dropdown-content">
+                    <a href="#" onclick="mostrarBloque('galeria-modulos')">Módulos</a>
+                    <a href="#" onclick="mostrarBloque('galeria-fotos')">Fotos del Instituto</a>
+                </div>
+            </li>
+            <li><a href="https://wa.me/50498800876" target="_blank">WhatsApp</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <img src="logo.jpeg" alt="Logo Instituto" class="logo-escudo">
+        <h1>Instituto Perla del Ulúa</h1>
+        <p>Progreso, Yoro</p>
+    </div>
+
+    <div class="container">
+        <!-- PASO 1: ACCESO -->
+        <div id="step1">
+            <h3 style="text-align:center; color:#d8103e;">Bienvenido</h3>
+            <input type="text" id="nombre" placeholder="Ingresa tu nombre" required>
+            <input type="email" id="correo" placeholder="Correo electrónico" required>
+            <button onclick="mostrarConsulta()">Ingresar al Sitio</button>
+        </div>
+
+        <!-- PASO 2: FILTROS DINÁMICOS -->
+        <div id="step2" class="hidden">
+            <h3 id="bienvenida" style="text-align:center; color:#d81b60;"></h3>
+            
+            <label>1. Seleccione la Jornada</label>
+            <select id="jornada" onchange="evaluarFiltros()">
+                <option value="">-- Seleccione Jornada --</option>
+                <option value="matutina">Matutina</option>
+                <option value="vespertina">Vespertina</option>
+            </select>
+
+            <div id="bloque-grado" class="hidden">
+                <label>2. Seleccione el Grado</label>
+                <select id="grado" onchange="evaluarFiltros()">
+                    <option value="">-- Seleccione Grado --</option>
+                    <option value="7">Séptimo</option>
+                    <option value="8">Octavo</option>
+                    <option value="9">Noveno</option>
+                    <option value="carreras">Carreras (Bachilleratos)</option>
+                </select>
+            </div>
+
+            <div id="bloque-resultado" class="hidden">
+                <label>Secciones / Carreras Disponibles</label>
+                <div id="resultado-contenido" class="info-resultado"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN DE GALERÍAS MULTIMEDIA -->
+    <div class="container hidden" id="contenedor-galerias">
+        
+        <!-- ELEMENTO SOLICITADO: SASUKE 3D BAILANDO AL INICIO DE LA GALERÍA -->
+        <div class="contenedor-sasuke-3d">
+            <div class="cartel-bienvenida">✨ ¡Bienvenido! ✨</div>
+            <div class="sasuke-cuerpo">
+                <div class="sasuke-pelo"></div>
+                <div class="sasuke-cabeza"></div>
+                <div class="sasuke-capa"></div>
+                <div class="sasuke-piernas">
+                    <div class="pierna izq"></div>
+                    <div class="pierna der"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Módulos -->
+        <div id="galeria-modulos" class="hidden">
+            <h3 style="text-align:center; color:#d81b60; margin-bottom:15px;">Módulos del Establecimiento</h3>
+            <div class="grid-galeria">
+                <div class="galeria-item">
+                    <img src="modulo1.jpeg" alt="Módulo 1">
+                    <div class="galeria-caption">Módulo 01</div>
+                </div>
+                <div class="galeria-item">
+                    <img src="modulo2.jpeg" alt="Módulo 2">
+                    <div class="galeria-caption">Módulo 02 (José Cecilio del Valle)</div>
+                </div>
+                <div class="galeria-item">
+                    <img src="modulo3.jpeg" alt="Módulo 3">
+                    <div class="galeria-caption">Módulo 03 (Dionisio de Herrera)</div>
+                </div>
+                <div class="galeria-item">
+                    <img src="modulo4.jpeg" alt="Módulo 4">
+                    <div class="galeria-caption">Módulo 04 (Francisco Morazán)</div>
+                </div>
+                <div class="galeria-item">
+                    <img src="modulo5.jpeg" alt="Módulo 5">
+                    <div class="galeria-caption">Módulo 05</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fotos Instituto -->
+        <div id="galeria-fotos" class="hidden">
+            <h3 style="text-align:center; color:#d81b60; margin-bottom:15px;">Fotos del Instituto</h3>
+            <div class="grid-galeria">
+                <div class="galeria-item">
+                    <img src="fotoinst4.jpeg" alt="Foto 1">
+                    <div class="galeria-caption">Pasillo de Entrada Principal</div>
+                </div>
+                <div class="galeria-item">
+                    <img src="fotoinst2.jpeg" alt="Foto 2">
+                    <div class="galeria-caption">Plaza Central y Canchas</div>
+                </div>
+                <div class="galeria-item">
+                    <img src="fotoinst1.jpeg" alt="Foto 3">
+                    <div class="galeria-caption">Edificio de Dos Plantas</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function mostrarConsulta() {
+            const nombre = document.getElementById('nombre').value.trim();
+            const correo = document.getElementById('correo').value.trim();
+            if(nombre && correo) {
+                document.getElementById('step1').classList.add('hidden');
+                document.getElementById('step2').classList.remove('hidden');
+                document.getElementById('bienvenida').innerText = "Hola, " + nombre;
+            } else {
+                alert("Por favor completa los datos para continuar.");
+            }
+        }
+
+        function evaluarFiltros() {
+            const jornada = document.getElementById('jornada').value;
+            const grado = document.getElementById('grado').value;
+            
+            const bloqueGrado = document.getElementById('bloque-grado');
+            const bloqueResultado = document.getElementById('bloque-resultado');
+            const resultadoContenido = document.getElementById('resultado-contenido');
+
+            if (jornada !== "") {
+                bloqueGrado.classList.remove('hidden');
+            } else {
+                bloqueGrado.classList.add('hidden');
+                bloqueResultado.classList.add('hidden');
+                document.getElementById('grado').value = "";
+                return;
+            }
+
+            if (grado !== "") {
+                bloqueResultado.classList.remove('hidden');
+                
+                if (jornada === "matutina") {
+                    if (grado === "7") {
+                        resultadoContenido.innerHTML = "<h4>7mo Grado — Matutina</h4><p>Secciones asignadas de la 7-1 hasta la 7-8.<br>Secciones extras: 7-16 y 7-18.</p>";
+                    } else if (grado === "8") {
+                        resultadoContenido.innerHTML = "<h4>8vo Grado — Matutina</h4><p>Secciones asignadas de la 8-1 hasta la 8-6.<br>Secciones extras: 8-11 y 8-13.</p>";
+                    } else if (grado === "9") {
+                        resultadoContenido.innerHTML = "<h4>9no Grado — Matutina</h4><p>Secciones asignadas de la 9-1 hasta la 9-3.<br>Secciones extras: 9-7, 9-8, 9-9 y 9-10.</p>";
+                    } else if (grado === "carreras") {
+                        resultadoContenido.innerHTML = "<h4>Carreras — Matutina</h4><p>• <b>BCH (Ciencias y Humanidades):</b> Secciones 10 y 11<br>• <b>Informática:</b> 10-2, 11-2, 12-2<br>• <b>Contaduría y Finanzas:</b> 10-3, 11-3, 12-3<br>• <b>Mercadotecnia / Robótica / Administración / Bilingüe:</b> Secciones 10-1, 11-1, 12-1</p>";
+                    }
+                } else if (jornada === "vespertina") {
+                    if (grado === "7") {
+                        resultadoContenido.innerHTML = "<h4>7mo Grado — Vespertina</h4><p>• Sección 9 — Carmen Moradel<br>• Sección 10 — Alejandro García<br>• Sección 11 — Olga Tome<br>• Sección 12 — Wendy Rivera<br>• Secciones 13 y 14 — I. Hernández / M. García</p>";
+                    } else if (grado === "8") {
+                        resultadoContenido.innerHTML = "<h4>8vo Grado — Vespertina</h4><p>• Sección 7 — M. Banegas<br>• Sección 8 — E. Juárez<br>• Sección 9 — O. Barahona<br>• Secciones 10, 12, 14 — L. Alcántara / E. Roldán / J. Smith</p>";
+                    } else if (grado === "9") {
+                        resultadoContenido.innerHTML = "<h4>9no Grado — Vespertina</h4><p>• Sección 4 — Edwin Amaya<br>• Sección 5 — M. Galeas<br>• Sección 6 — L. Andino<br>• Secciones 11 y 12 — J. Banegas / A. Bueso</p>";
+                    } else if (grado === "carreras") {
+                        resultadoContenido.innerHTML = "<h4>Carreras — Vespertina</h4><p>• <b>10mo BCH (Sección 1):</b> Renato Chávez<br>• <b>11no BCH (Sección 1):</b> Reyna Guerra<br>• <b>10mo BTPI Informática (Secciones 1 y 2):</b> Bella Vásquez</p>";
+                    }
+                }
+            } else {
+                bloqueResultado.classList.add('hidden');
+            }
+        }
+
+        function mostrarBloque(idGaleria) {
+            const paso1Oculto = document.getElementById('step1').classList.contains('hidden');
+            if(!paso1Oculto) {
+                alert("Por favor, ingresa tus datos primero en el formulario de bienvenida.");
+                return;
+            }
+
+            document.getElementById('contenedor-galerias').classList.remove('hidden');
+            document.getElementById('galeria-modulos').classList.add('hidden');
+            document.getElementById('galeria-fotos').classList.add('hidden');
+            
+            document.getElementById(idGaleria).classList.remove('hidden');
+            document.getElementById(idGaleria).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function irAInicio() {
+            document.getElementById('contenedor-galerias').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
